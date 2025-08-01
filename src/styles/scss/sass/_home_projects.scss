@@ -1,0 +1,154 @@
+.home_projects_section {
+    padding: 60px 0;
+    height: 100vh;
+    position: relative;
+    overflow: visible;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
+
+
+    .background {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    .projects_wrapper {
+        margin-bottom: 60px;
+        position: relative;
+
+
+        .project_card {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 32px;
+            border-radius: 40px;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+
+            .imgbox {
+                border-radius: 24px;
+            }
+
+            .content_wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+                padding: 10px 0;
+                gap: 32px;
+
+                .top_content {
+                    .title {
+                        color: var(--c-white, #FFF);
+                        font-family: var(--f-link-1);
+                        font-size: 40px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        margin-bottom: 16px;
+                    }
+
+                    .description {
+                        color: var(--c-white, #FFF);
+                        font-family: var(--f-pera-1);
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        margin-bottom: 16px;
+                    }
+
+                    .tags {
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        gap: 8px;
+
+                        li {
+                            padding: 8px 24px;
+                            border-radius: 24px;
+                            border: 1px solid var(--c-white);
+                            color: var(--c-white, #FFF);
+                            font-family: var(--f-link-1);
+                            font-size: 12px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .button_box {
+        padding: 20px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+
+@media only screen and (max-width: 992px) {
+    .home_projects_section {
+        .projects_wrapper {
+            .project_card {
+                padding: 16px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .home_projects_section {
+        .projects_wrapper {
+            .project_card {
+                .imgbox {
+                    aspect-ratio: 2/1;
+                }
+
+                .content_wrapper {
+                    gap: 12px;
+                    flex-direction: row;
+                    align-items: center;
+
+                    .top_content {
+                        .title {
+                            font-size: 24px;
+                            margin-bottom: 4px;
+                        }
+
+                        .description {
+                            font-size: 12px;
+                            margin-bottom: 8px;
+                        }
+
+                        .tags {
+                            gap: 4px;
+
+                            li {
+                                padding: 4px 12px;
+                                border-radius: 12px;
+                                font-size: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

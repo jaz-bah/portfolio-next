@@ -1,0 +1,93 @@
+.footer_section {
+    padding: 60px 0 20px;
+    overflow: hidden;
+
+    .footer_marque_wrapper {
+        width: 100%;
+        margin-bottom: 120px;
+    }
+
+    .middle_content {
+        text-align: center;
+        padding: 0 20px;
+
+        .heading {
+            color: var(--c-white, #FFF);
+            font-family: var(--f-link-1);
+            font-size: 64px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: 80px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+
+        .mail {
+            color: var(--c-white, #FFF);
+            font-family: var(--f-pera-1);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-bottom: 32px;
+            display: block;
+
+            &,
+            & * {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .bottom_content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        .copyright {
+            color: var(--c-white, #FFF);
+            font-family: var(--f-link-1);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+        }
+
+        .social {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+
+            li {
+                color: var(--c-white, #FFF);
+                font-family: var(--f-link-1);
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 20px;
+
+                a{
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+
+                    &:hover{
+                        color: var(--c-white, #FFF);
+                        opacity: 0.5;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px){
+    .footer_section {
+        padding: 30px 0 100px;
+
+        .bottom_content {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+}

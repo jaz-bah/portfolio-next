@@ -1,0 +1,44 @@
+@import 'sass/root';
+@import 'sass/reset';
+
+//navbar
+@import 'sass/navbar';
+
+
+// home
+@import 'sass/home_banner';
+@import 'sass/home_expertise';
+@import 'sass/home_projects';
+@import 'sass/home_experience';
+
+
+// about
+@import 'sass/about_banner';
+@import 'sass/about_details';
+@import 'sass/about_education';
+
+// projects
+@import 'sass/projects_banner';
+@import 'sass/projects_tabs';
+
+// contact
+@import 'sass/contact';
+
+
+
+// footer
+@import 'sass/footer';
+
+
+// cursor
+@import 'sass/cursor';
+
+// scroll bar
+@import 'sass/scrollbar';
+
+// text marquee
+@import 'sass/text_marque';
+
+
+
+@import 'sass/responsive';
