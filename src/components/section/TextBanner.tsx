@@ -1,147 +1,150 @@
-"use client"
-import { useGSAP } from '@gsap/react'
-import gsap from 'gsap'
-import { ScrollTrigger, SplitText } from 'gsap/all'
-import Image from 'next/image'
-import { useRef } from 'react'
+"use client";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger, SplitText, ScrambleTextPlugin } from "gsap/all";
+import Image from "next/image";
+import { useRef } from "react";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(SplitText, ScrollTrigger, ScrambleTextPlugin);
 
 const texts = [
     {
         type: "text",
-        value: "I'm"
+        value: "I'm",
     },
     {
         type: "text",
-        value: "a"
+        value: "a",
     },
     {
         type: "image",
-        value: "/static/images/banner-text-img-4.png"
+        value: "/static/images/banner-text-img-4.png",
     },
     {
         type: "text",
-        value: "Front-End"
+        value: "Front-End",
     },
     {
         type: "text",
-        value: "Developer"
+        value: "Developer",
     },
     {
         type: "image",
-        value: "/static/images/banner-text-img-3.png"
+        value: "/static/images/banner-text-img-3.png",
     },
     {
         type: "text",
-        value: "Specialized"
+        value: "Specialized",
     },
     {
         type: "text",
-        value: "in"
+        value: "in",
     },
     {
         type: "text",
-        value: "Shopify"
+        value: "Shopify",
     },
     {
         type: "image",
-        value: "/static/images/banner-text-img-2.png"
+        value: "/static/images/banner-text-img-2.png",
     },
     {
         type: "text",
-        value: "Theme"
+        value: "Theme",
     },
     {
         type: "image",
-        value: "/static/images/banner-text-img-1.png"
+        value: "/static/images/banner-text-img-1.png",
     },
     {
         type: "text",
-        value: "&"
+        value: "&",
     },
     {
         type: "text",
-        value: "App"
+        value: "App",
     },
     {
         type: "text",
-        value: "Development"
-    }
-]
+        value: "Development",
+    },
+];
 
 const brands = [
     "/static/images/next.png",
     "/static/images/remix.png",
-    "/static/images/shopify.png"
-]
+    "/static/images/shopify.png",
+];
 
 export default function TextBanner() {
     const bannerRef = useRef<HTMLDivElement | null>(null);
 
-    useGSAP(() => {
-        if (bannerRef.current) {
-            const bannerText = bannerRef.current.querySelector('.banner_text');
-            const bannerTextImage = bannerRef.current.querySelectorAll('.text_image');
-            const brands = bannerRef.current.querySelectorAll('.brands .brand');
-            const peragraph = bannerRef.current.querySelectorAll('.text_content p');
+    useGSAP(
+        () => {
+            if (bannerRef.current) {
+                const bannerText = bannerRef.current.querySelector(".banner_text");
+                const bannerTextImage =
+                    bannerRef.current.querySelectorAll(".text_image");
+                const brands = bannerRef.current.querySelectorAll(".brands .brand");
+                const peragraph = bannerRef.current.querySelectorAll(".text_content p");
 
-            const splitText = new SplitText(bannerText, {
-                type: "words",
-                charsClass: "text",
-            });
+                const splitText = new SplitText(bannerText, {
+                    type: "words",
+                    charsClass: "text",
+                });
 
-            const splitPera = new SplitText(peragraph, {
-                type: "chars",
-                charsClass: "text",
-            });
+                const bannerTimeline = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: bannerRef.current,
+                    },
+                });
 
-            const bannerTimeline = gsap.timeline({
-                scrollTrigger: {
-                    trigger: bannerRef.current,
-                },
-            });
-
-            bannerTimeline.from(splitText.words, {
-                duration: 1,
-                y: 100,
-                ease: "power4.out",
-                stagger: 0.1,
-            }).fromTo(bannerTextImage,
-                {
-                    height: "0px",
-                },
-                {
-                    height: "calc(100vw * var(--img-height-ratio))",
-                    duration: 0.5,
-                    ease: "power1.in",
-                },
-                "<0.5"
-            ).fromTo(brands,
-                {
-                    x: 100,
-                    opacity: 0,
-                },
-                {
-                    x: 0,
-                    opacity: 1,
-                    duration: 1,
-                    ease: "power4.out",
-                    stagger: 0.1,
-                },
-                "<0.5"
-            ).from(splitPera.chars, {
-                duration: 0.5,
-                x: 10,
-                y: -10,
-                rotate: 10,
-                opacity: 0,
-                ease: "power4.out",
-                stagger: 0.05,
-            }, "<-2")
-        }
-    }, { scope: bannerRef });
-
+                bannerTimeline
+                    .from(splitText.words, {
+                        duration: 1,
+                        y: 100,
+                        ease: "power4.out",
+                        stagger: 0.1,
+                    })
+                    .fromTo(
+                        bannerTextImage,
+                        {
+                            height: "0px",
+                        },
+                        {
+                            height: "calc(100vw * var(--img-height-ratio))",
+                            duration: 0.5,
+                            ease: "power1.in",
+                        },
+                        "<0.5"
+                    )
+                    .fromTo(
+                        brands,
+                        {
+                            x: 100,
+                            opacity: 0,
+                        },
+                        {
+                            x: 0,
+                            opacity: 1,
+                            duration: 1,
+                            ease: "power4.out",
+                            stagger: 0.1,
+                        },
+                        "<0.5"
+                    )
+                    .to(peragraph, {
+                        scrambleText: {
+                            text: "Welcome to my world— where clean code meets creative flow.",
+                            chars: "Welcome to my world— where clean code meets creative flow.",
+                            speed: 0.4,
+                        },
+                        duration: 2,
+                    });
+            }
+        },
+        { scope: bannerRef }
+    );
 
     return (
         <section ref={bannerRef} className="home_banner_section">
@@ -153,16 +156,18 @@ export default function TextBanner() {
                 <div className="content_wrapper">
                     <div className="top_content">
                         <h2 className="banner_text" data-cursor-type="heading">
-                            {texts && texts.map((text, index) =>
-                                text.type === "text" ?
-                                    <span key={index}>{text.value}</span> :
-                                    <span
-                                        key={index}
-                                        className="text_image"
-                                        style={{ backgroundImage: `url(${text.value})` }}
-                                    >
-                                    </span>
-                            )}
+                            {texts &&
+                                texts.map((text, index) =>
+                                    text.type === "text" ? (
+                                        <span key={index}>{text.value}</span>
+                                    ) : (
+                                        <span
+                                            key={index}
+                                            className="text_image"
+                                            style={{ backgroundImage: `url(${text.value})` }}
+                                        ></span>
+                                    )
+                                )}
                         </h2>
                     </div>
 
@@ -172,28 +177,19 @@ export default function TextBanner() {
                                 {brands.map((brand, index) => (
                                     <div key={index} className="brand">
                                         <div className="imgbox">
-                                            <Image
-                                                src={brand}
-                                                alt="Brand"
-                                                width={200}
-                                                height={150}
-                                            />
+                                            <Image src={brand} alt="Brand" width={200} height={150} />
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
                             <div className="text_content" data-cursor-type="text">
-                                <p>
-                                    Welcome to my world—
-                                    where clean code meets creative flow.
-                                </p>
+                                <p></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    )
+    );
 }
-

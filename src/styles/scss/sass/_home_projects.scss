@@ -4,7 +4,7 @@
     position: relative;
     overflow: visible;
 
-    &::-webkit-scrollbar{
+    &::-webkit-scrollbar {
         display: none;
     }
 
@@ -105,6 +105,8 @@
 
 @media only screen and (max-width: 992px) {
     .home_projects_section {
+        height: auto;
+
         .projects_wrapper {
             .project_card {
                 padding: 16px;

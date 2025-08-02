@@ -63,10 +63,10 @@ export default function ProjectsStack() {
     }, []);
 
     useGSAP(() => {
-        if (sectionRef.current && shouldAnimate) {
+        if (sectionRef.current && shouldAnimate && device === "desktop") {
             const cards = gsap.utils.toArray(".project_card");
             const animDuration = 0.5;
-            const bottom = device == "mobile" ? `bottom top-=${10 * cards.length}` : `bottom top-=${100 * cards.length}`;
+            const bottom = `bottom top-=${100 * cards.length}`;
 
             const tl = gsap.timeline({
                 scrollTrigger: {

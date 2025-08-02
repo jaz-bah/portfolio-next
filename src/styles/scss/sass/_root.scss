@@ -123,9 +123,15 @@ $font-size-learge: 25px;
     }
 
     @media only screen and (max-width: 768px) {
-        .left_box{
-            .heading{
-                font-size: 24px;
+        .left_box {
+            .heading {
+                font-size: 22px;
+            }
+        }
+
+        .right_box {
+            .link {
+                font-size: 16px;
             }
         }
     }
@@ -160,31 +166,31 @@ $font-size-learge: 25px;
     @return calc((100% / $card - ($gap * ($card - 1) / $card)));
 }
 
-section{
+section {
     overflow-x: hidden;
 }
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: none !important;
+    animation: none !important;
 }
 
 ::view-transition-group(root) {
-  z-index: auto !important;
+    z-index: auto !important;
 }
 
 ::view-transition-image-pair(root) {
-  isolation: isolate;
-  will-change: transform, opacity, clip-path;
-  z-index: 1;
+    isolation: isolate;
+    will-change: transform, opacity, clip-path;
+    z-index: 1;
 }
 
 ::view-transition-new(root) {
-  z-index: 10000;
-  animation: none !important;
+    z-index: 10000;
+    animation: none !important;
 }
 
 ::view-transition-old(root) {
-  z-index: 1;
-  animation: none !important;
+    z-index: 1;
+    animation: none !important;
 }

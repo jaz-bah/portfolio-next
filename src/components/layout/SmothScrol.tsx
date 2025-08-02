@@ -5,6 +5,7 @@ import gsap from 'gsap';
 import { ScrollSmoother, ScrollTrigger } from "gsap/all";
 import React, { useState } from 'react';
 import ScrollBar from './ScrollBar';
+import { useDevice } from '@/hooks/useDevice';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -14,6 +15,7 @@ interface Props {
 }
 export default function SmothScrol({ children }: Props) {
     const [scolledProgress, setScolledProgress] = useState(0);
+    const device = useDevice();
 
     useGSAP(() => {
         ScrollSmoother.create({
@@ -34,7 +36,9 @@ export default function SmothScrol({ children }: Props) {
                     {children}
                 </div>
             </div>
-            <ScrollBar scolledProgress={scolledProgress} />
+            {device === "desktop" && (
+                <ScrollBar scolledProgress={scolledProgress} />
+            )}
         </>
     )
 }
