@@ -5,6 +5,7 @@ import { Facebook, Linkedin, Mail, MapPin, Phone, Twitter } from 'lucide-react'
 import Link from 'next/link'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap';
+import Button from '../others/Button'
 
 export default function Contact() {
     const refBox = useRef<HTMLDivElement>(null);
@@ -100,7 +101,7 @@ export default function Contact() {
                                     <div className="bottom_bar">
                                     </div>
                                 </div>
-                                <button className='button' type="submit">Send</button>
+                                <Button>Send</Button>
                             </form>
                         </div>
                     </div>

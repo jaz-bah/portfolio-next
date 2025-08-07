@@ -121,6 +121,12 @@
                     font-weight: 400;
                     line-height: normal;
                     width: 400px;
+
+                    p{
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 5px;
+                    }
                 }
             }
         }

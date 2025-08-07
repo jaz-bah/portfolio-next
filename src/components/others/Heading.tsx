@@ -52,13 +52,41 @@ export default function Heading({ title, link, toggleActions = "play none none r
                 duration: 1,
                 ease: "power2.out",
             })
+
+            // link
+            const link = headingRef.current.querySelector('.link');
+            const first = link?.querySelector('.first') as HTMLElement;
+            const second = link?.querySelector('.second') as HTMLElement;
+
+            const firstSplit = new SplitText(first, {
+                type: "chars",
+            })
+            const secondSplit = new SplitText(second, {
+                type: "chars",
+            })
+
+            const animateChars = (y: number) => {
+                const config = {
+                    yPercent: y,
+                    duration: 0.5,
+                    stagger: 0.05,
+                    ease: "power2.out",
+                };
+                gsap.to(firstSplit.chars, config);
+                gsap.to(secondSplit.chars, { ...config, yPercent: y * 1.2 }); 
+            };
+
+            link?.addEventListener('mouseenter', () => animateChars(-100));
+            link?.addEventListener('mouseleave', () => animateChars(0));
+
+
         }
     }, { scope: headingRef })
 
 
     return (
-        <div className="heading_box">
-            <div ref={headingRef} className="left_box" data-cursor-type="heading">
+        <div ref={headingRef} className="heading_box">
+            <div className="left_box" data-cursor-type="heading">
                 <div className="icon_box">
                     <StarIcon />
                 </div>
@@ -69,7 +97,10 @@ export default function Heading({ title, link, toggleActions = "play none none r
 
             {link && (
                 <div className="right_box">
-                    <Link href={link} className="link" data-cursor-type="link">View All</Link>
+                    <Link href={link} className="link" data-cursor-type="link">
+                        <span className="first">View All</span>
+                        <span className="second">View All</span>
+                    </Link>
                 </div>
             )}
         </div>

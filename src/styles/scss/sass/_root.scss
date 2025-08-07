@@ -102,6 +102,15 @@ $font-size-learge: 25px;
             text-decoration: none;
             position: relative;
             padding-bottom: 4px;
+            height: 18px;
+            display: block;
+            overflow: hidden;
+
+            .first,
+            .second {
+                display: block;
+            }
+
 
             &::before {
                 content: "";
@@ -141,7 +150,6 @@ $font-size-learge: 25px;
     padding: 16px 32px;
     border-radius: 32px;
     background: var(--c-white);
-    color: var(--c-dark, #010208) !important;
     font-family: var(--f-link-1);
     font-size: 14px;
     font-style: normal;
@@ -149,10 +157,40 @@ $font-size-learge: 25px;
     line-height: 24px;
     display: block;
     width: fit-content;
+    position: relative;
+    overflow: hidden;
+
+    .text {
+        position: relative;
+        color: var(--c-dark, #010208);
+        backdrop-filter: invert(1);
+        z-index: 1;
+        transition: all 350ms ease;
+    }
+
+    .bg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: block;
+        width: 0%;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        background-color: var(--c-accent);
+        transition: width 0.8s ease-in-out, height 0.8s ease-in-out;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+    }
 
     &,
     & * {
         cursor: pointer;
+    }
+
+    &:hover {
+        .bg {
+            width: 300%;
+        }
     }
 
     @media screen and (max-width: 768px) {

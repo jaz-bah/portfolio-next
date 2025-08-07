@@ -86,7 +86,7 @@ export default function TextBanner() {
                 const bannerTextImage =
                     bannerRef.current.querySelectorAll(".text_image");
                 const brands = bannerRef.current.querySelectorAll(".brands .brand");
-                const peragraph = bannerRef.current.querySelectorAll(".text_content p");
+                const peragraphs = bannerRef.current.querySelectorAll(".text_content p span");
 
                 const splitText = new SplitText(bannerText, {
                     type: "words",
@@ -98,6 +98,8 @@ export default function TextBanner() {
                         trigger: bannerRef.current,
                     },
                 });
+
+
 
                 bannerTimeline
                     .from(splitText.words, {
@@ -133,14 +135,20 @@ export default function TextBanner() {
                         },
                         "<0.5"
                     )
-                    .to(peragraph, {
+
+                const peragraphContents = ["Welcome", "to", "my", "world-", "where", "clean", "code", "meets", "creative", "flow."]
+
+                peragraphs.forEach((pera, index) => {
+                    gsap.to(pera, {
                         scrambleText: {
-                            text: "Welcome to my world— where clean code meets creative flow.",
-                            chars: "Welcome to my world— where clean code meets creative flow.",
+                            text: peragraphContents[index],
+                            chars: "capitalize",
                             speed: 0.4,
                         },
                         duration: 2,
                     });
+                })
+
             }
         },
         { scope: bannerRef }
@@ -184,7 +192,9 @@ export default function TextBanner() {
                             </div>
 
                             <div className="text_content" data-cursor-type="text">
-                                <p></p>
+                                <p>
+                                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                </p>
                             </div>
                         </div>
                     </div>
