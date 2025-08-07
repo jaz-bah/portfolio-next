@@ -15,11 +15,16 @@ export default function Layout({ children }: Props) {
     return (
         <Providers>
             {pathName.includes("/admin") ? (
+
                 <AdminLayout>{children}</AdminLayout>
             ) : (
-                <PublicLayout>
-                    {children}
-                </PublicLayout>
+                <>
+                    {pathName.includes("sign") ? (
+                        <>{children}</>
+                    ) : (
+                        <PublicLayout>{children}</PublicLayout>
+                    )}
+                </>
             )}
         </Providers>
     )

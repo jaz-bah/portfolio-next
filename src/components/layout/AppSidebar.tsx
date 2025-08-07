@@ -77,7 +77,8 @@ export function AppSidebar() {
 
                 <SidebarFooter className="border-t border-border">
                     <div className="flex flex-wrap align-center justify-between gap-2">
-                        <Button variant="destructive" className="flex-1" size={state === "collapsed" ? "sm" : "default"} onClick={handleLogout}>
+                        <Button variant="destructive" className="flex-1 w-full shrink-0" size={state === "collapsed" ? "icon" : "default"} onClick={handleLogout}>
+
                             {loggingOut ? (
                                 <Loader2 className="animate-spin" />
                             ) : (

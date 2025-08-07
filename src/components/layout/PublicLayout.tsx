@@ -13,7 +13,7 @@ interface Props {
 export default function PublicLayout({ children }: Props) {
     const device = useDevice();
     return (
-        <>
+        <div className="public_layout">
             <Header />
             <SmothScrol>
                 <div id="mainContent">
@@ -22,6 +22,6 @@ export default function PublicLayout({ children }: Props) {
                 </div>
             </SmothScrol>
             {device === "desktop" && <Cursor />}
-        </>
+        </div>
     );
 }
