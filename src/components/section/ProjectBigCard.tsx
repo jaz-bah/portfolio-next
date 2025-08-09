@@ -7,7 +7,7 @@ interface Props {
     title: string,
     description: string,
     tags: string[],
-    link: string
+    link?: string
 }
 
 export default function ProjectBigCard({ image, title, description, tags, link }: Props) {
@@ -15,7 +15,7 @@ export default function ProjectBigCard({ image, title, description, tags, link }
         <div className="project_card">
             <div className="row">
                 <div className="col-12 col-md-6">
-                    <div className="imgbox">
+                    <div className="imgbox_full">
                         <Image
                             src={image}
                             alt={title}
@@ -37,7 +37,9 @@ export default function ProjectBigCard({ image, title, description, tags, link }
                         </div>
 
                         <div className="bottom_content">
-                            <Button type='Link' url={link}>View Project</Button>
+                            {link && (
+                                <Button type='Link' url={link} target='_blank'>View Project</Button>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
-import { Project } from "@/types/project.type";
+import { IProjectResponse } from "@/types/project.type";
 
 
-export function filterTags(projects: Project[]) {
+export function filterTags(projects: IProjectResponse[]) {
     const tags: string[] = [];
     projects.forEach((project) => {
         project.tags.forEach((tag) => {

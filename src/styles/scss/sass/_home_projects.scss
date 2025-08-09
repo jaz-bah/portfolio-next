@@ -37,8 +37,9 @@
             position: relative;
             overflow: hidden;
 
-            .imgbox {
+            .imgbox_full {
                 border-radius: 24px;
+                aspect-ratio: 5/3.5;
             }
 
             .content_wrapper {
@@ -119,7 +120,7 @@
     .home_projects_section {
         .projects_wrapper {
             .project_card {
-                .imgbox {
+                .imgbox_full {
                     aspect-ratio: 2/1;
                 }
 

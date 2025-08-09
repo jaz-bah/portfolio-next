@@ -23,8 +23,8 @@ const formSchema = z.object({
     name: z.string().min(2, {
         message: "Name must be at least 2 characters.",
     }),
-    short_description: z.string().max(100, {
-        message: "Description must be at most 100 characters.",
+    short_description: z.string().max(200, {
+        message: "Description must be at most 200 characters.",
     }),
     tags: z.array(z.string()),
     live_url: z.string().url(),
@@ -326,7 +326,7 @@ export function AddProjectForm() {
                     </div>
                 </div>
                 <div className="flex justify-end">
-                    <Button type="submit" disabled={!form.formState.isValid || isSubmitting}>
+                    <Button type="submit" disabled={isSubmitting}>
                         {isSubmitting ? (
                             <>
                                 Uploading

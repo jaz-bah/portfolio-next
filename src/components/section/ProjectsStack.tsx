@@ -7,58 +7,33 @@ import { SplitText } from "gsap/SplitText"
 import { useRef, useEffect, useState } from 'react'
 import Heading from '../others/Heading'
 import ProjectBigCard from './ProjectBigCard'
+import { IProjectResponse } from '@/types/project.type'
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
-const projects = [
-    {
-        image: "/static/images/projects.png",
-        title: "Project Title",
-        description: "Project Description",
-        tags: ["Tag 1", "Tag 2", "Tag 3"],
-        link: "/"
-    },
-    {
-        image: "/static/images/projects.png",
-        title: "Project Title",
-        description: "Project Description",
-        tags: ["Tag 1", "Tag 2", "Tag 3"],
-        link: "/"
-    },
-    {
-        image: "/static/images/projects.png",
-        title: "Project Title",
-        description: "Project Description",
-        tags: ["Tag 1", "Tag 2", "Tag 3"],
-        link: "/"
-    },
-    {
-        image: "/static/images/projects.png",
-        title: "Project Title",
-        description: "Project Description",
-        tags: ["Tag 1", "Tag 2", "Tag 3"],
-        link: "/"
-    },
-    {
-        image: "/static/images/projects.png",
-        title: "Project Title",
-        description: "Project Description",
-        tags: ["Tag 1", "Tag 2", "Tag 3"],
-        link: "/"
-    },
+const projectNames = [
+    "Finly",
+    "Beats",
+    "Travela",
+    "L’Gran",
 ]
 
-export default function ProjectsStack() {
+
+interface Props {
+    projects: IProjectResponse[];
+}
+
+export default function ProjectsStack({ projects }: Props) {
     const sectionRef = useRef<HTMLDivElement>(null);
     const [shouldAnimate, setShouldAnimate] = useState(false);
     const device = useDevice();
+    const [featuredProjects, setFeaturedProjects] = useState<IProjectResponse[]>([]);
+
 
     useEffect(() => {
-        // Add delay to ensure layout is fully rendered
         const timer = setTimeout(() => {
             setShouldAnimate(true);
-        }, 1000); // Adjust delay as needed (100ms should be sufficient)
-
+        }, 1000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -90,7 +65,25 @@ export default function ProjectsStack() {
                 }, "<0.15")
             });
         }
-    }, { scope: sectionRef, dependencies: [shouldAnimate] })
+    }, { scope: sectionRef, dependencies: [shouldAnimate] });
+
+    useEffect(() => {
+        if (projects) {
+            setFeaturedProjects([]);
+            projectNames.forEach((name) => {
+                const project = projects.find((project) => project.name === name);
+                if (project) {
+                    setFeaturedProjects((prev) => [...prev, project]);
+                }
+            });
+
+            const timer = setTimeout(() => {
+                setShouldAnimate(true);
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [projects]);
+
 
     return (
         <section className='home_projects_section' ref={sectionRef}>
@@ -106,14 +99,14 @@ export default function ProjectsStack() {
                 <Heading title='Latest Builds' link='/projects' />
 
                 <div className="projects_wrapper">
-                    {projects && projects.map((project, index) => (
+                    {featuredProjects && featuredProjects.map((project, index) => (
                         <ProjectBigCard
                             key={index}
-                            image={project.image}
-                            title={project.title}
-                            description={project.description}
+                            image={project.pc_preview}
+                            title={project.name}
+                            description={project.short_description}
                             tags={project.tags}
-                            link={project.link}
+                            link={project.live_url}
                         />
                     ))}
                 </div>

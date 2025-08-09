@@ -1,6 +1,6 @@
 "use client"
-import { Project } from '@/types/project.type';
-import { ArrowUpRight, Code, Eye } from 'lucide-react';
+import { IProjectResponse } from '@/types/project.type';
+import { Code, Eye } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
@@ -9,12 +9,14 @@ import { useEffect, useRef } from 'react';
 
 
 interface Props {
-    project: Project
+    project: IProjectResponse
 }
 
 export default function ProjectSmallCard({ project }: Props) {
     const projectRef = useRef<HTMLDivElement>(null);
-    const cleanedTags = project.tags.map(tag => tag.replace(/\./g, "").replace(/\s+/g, "_")).join(" ");
+    const cleanedTags = project.tags
+        .map(tag => tag.replace(/\./g, "").replace(/\//g, "-").replace(/\s+/g, "_"))
+        .join(" ");
 
 
 
@@ -42,43 +44,47 @@ export default function ProjectSmallCard({ project }: Props) {
         <div className={`swiper-slide mix project_card ${cleanedTags} `} ref={projectRef}>
             <div className="button_box">
                 <div className="content_wrapper">
-                    <Link href={project.view_link} className="icon_box" data-toggle="tooltip" data-placement="top" title="View">
-                        <Eye />
-                    </Link>
-                    <Link href={project.code_link} className="icon_box" data-toggle="tooltip" data-placement="top" title="Code">
-                        <Code />
-                    </Link>
+                    {project.live_url && (
+                        <Link href={project.live_url} className="icon_box" data-toggle="tooltip" data-placement="top" title="View">
+                            <Eye />
+                        </Link>
+                    )}
+                    {project.github_url && (
+                        <Link href={project.github_url} className="icon_box" data-toggle="tooltip" data-placement="top" title="Code">
+                            <Code />
+                        </Link>
+                    )}
 
-                    <Link href={`/projects/${project.id} `} className="icon_box" data-toggle="tooltip" data-placement="top" title="Details">
+                    {/* <Link href={`/projects/${project.id} `} className="icon_box" data-toggle="tooltip" data-placement="top" title="Details">
                         <ArrowUpRight />
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
             <div className="head">
                 <div className="img_desk">
                     <div className="imgbox_full">
-                        <Image src={project.desk_image} alt="image" width={500} height={500} />
+                        <Image src={project.pc_preview} alt="image" width={500} height={500} />
                     </div>
                 </div>
 
                 <div className="img_tab">
                     <div className="imgbox_full">
-                        <Image src={project.desk_image} alt="image" width={200} height={200} />
+                        <Image src={project.pc_preview} alt="image" width={200} height={200} />
                     </div>
                 </div>
 
                 <div className="img_mobile">
                     <div className="imgbox_full">
-                        <Image src={project.mobile_image} alt="image" width={400} height={400} />
+                        <Image src={project.mobile_preview} alt="image" width={400} height={400} />
                     </div>
                 </div>
             </div>
             <div className="body">
-                <h2 className="title">{project.title}</h2>
+                <h2 className="title">{project.name}</h2>
 
                 <div className="more_content_wrapper">
                     <div className="more_content">
-                        <p className="description">{project.description}</p>
+                        <p className="description">{project.short_description}</p>
                         <ul className="tags">
                             {project.tags && project.tags.map((tag, index) => <li key={index}>{tag}</li>)}
                         </ul>

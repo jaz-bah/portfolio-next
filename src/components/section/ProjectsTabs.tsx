@@ -8,79 +8,23 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Navigation, Pagination } from 'swiper/modules';
 import ProjectSmallCard from './ProjectSmallCard';
+import { IProjectResponse } from '@/types/project.type';
 
-const projects = [
-    {
-        id: 1,
-        title: "Beats",
-        tags: ["Next.js"],
-        desk_image: "/static/images/beats-pc.png",
-        mobile_image: "/static/images/beats-mobile.png",
-        description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, esse aliquid
-        quod a aspernatur dolor, repudiandae impedit consequatur beatae veniam explicabo
-        veritatis, nemo ducimus ad. Modi non placeat quaerat alias.`,
-        view_link: "/",
-        code_link: "/"
-    },
-    {
-        id: 2,
-        title: "Beats",
-        tags: ["Tailwind", "Shopify"],
-        desk_image: "/static/images/beats-pc.png",
-        mobile_image: "/static/images/beats-mobile.png",
-        description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, esse aliquid
-        quod a aspernatur dolor, repudiandae impedit consequatur beatae veniam explicabo
-        veritatis, nemo ducimus ad. Modi non placeat quaerat alias.`,
-        view_link: "/",
-        code_link: "/"
-    },
-    {
-        id: 3,
-        title: "Beats",
-        tags: ["App", "Tailwind"],
-        desk_image: "/static/images/beats-pc.png",
-        mobile_image: "/static/images/beats-mobile.png",
-        description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, esse aliquid
-        quod a aspernatur dolor, repudiandae impedit consequatur beatae veniam explicabo
-        veritatis, nemo ducimus ad. Modi non placeat quaerat alias.`,
-        view_link: "/",
-        code_link: "/"
-    },
-    {
-        id: 4,
-        title: "Beats",
-        tags: ["Ecommerce", "Shopify", "Redux"],
-        desk_image: "/static/images/beats-pc.png",
-        mobile_image: "/static/images/beats-mobile.png",
-        description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, esse aliquid
-        quod a aspernatur dolor, repudiandae impedit consequatur beatae veniam explicabo
-        veritatis, nemo ducimus ad. Modi non placeat quaerat alias.`,
-        view_link: "/",
-        code_link: "/"
-    },
-    {
-        id: 5,
-        title: "Beats",
-        tags: ["Next.js", "Ecommerce", "Redux"],
-        desk_image: "/static/images/beats-pc.png",
-        mobile_image: "/static/images/beats-mobile.png",
-        description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, esse aliquid
-        quod a aspernatur dolor, repudiandae impedit consequatur beatae veniam explicabo
-        veritatis, nemo ducimus ad. Modi non placeat quaerat alias.`,
-        view_link: "/",
-        code_link: "/"
-    },
-]
+interface Props {
+    projects: IProjectResponse[];
+}
 
-export default function ProjectsTabs() {
+export default function ProjectsTabs({ projects }: Props) {
     const refTabs = useRef<HTMLUListElement>(null);
     const device = useDevice();
+
 
     const [tags] = useState<string[]>(filterTags(projects));
 
     useEffect(() => {
         if (device !== 'mobile') {
             if (window !== undefined) {
+
                 import('mixitup').then((mixitup) => {
                     mixitup.default('.project_grid');
                 });
@@ -134,8 +78,8 @@ export default function ProjectsTabs() {
                 },
             });
         }
+    }, [device]);
 
-    }, [device])
 
     return (
         <section className='projects_tabs_section'>
@@ -146,7 +90,13 @@ export default function ProjectsTabs() {
                         <span className="selector"></span>
                         <span className="selected"></span>
                         {tags && tags.map((tag, index) => (
-                            <li key={index} className="tab" role="button" data-filter={`.${tag.replace(/\./g, "").replace(/\s+/g, "_")}`}>{tag}</li>
+                            <li key={index} className="tab" role="button" data-filter={`.${tag
+                                .replace(/\./g, "")
+                                .replace(/\//g, "-")
+                                .replace(/\s+/g, "_")}`}
+                            >
+                                {tag}
+                            </li>
                         ))}
                     </ul>
                 </div>

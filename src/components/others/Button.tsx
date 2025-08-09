@@ -8,10 +8,11 @@ interface Props {
     type?: string,
     children: React.ReactNode,
     onClick?: () => void,
-    url?: string
+    url?: string,
+    target?: string
 }
 
-export default function Button({ children, type, onClick, url }: Props) {
+export default function Button({ children, type, onClick, url, target }: Props) {   
     const buttonRef = useRef<HTMLDivElement>(null);
 
 
@@ -41,7 +42,7 @@ export default function Button({ children, type, onClick, url }: Props) {
     return (
         <div ref={buttonRef}>
             {type == "Link" ?
-                <Link href={url ? url : "#"} className="button" data-cursor-type="link">
+                <Link href={url ? url : "#"} className="button" data-cursor-type="link" target={target}>
                     <span className="text">{children}</span>
                     <span className="bg"></span>
                 </Link> :
